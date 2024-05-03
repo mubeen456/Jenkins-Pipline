@@ -11,7 +11,14 @@ pipeline {
         stage('Build') {
             steps {
                 // Build code using Maven
-                sh 'mvn clean package'
+                echo "Building..."
+            }
+            post{
+                always{
+                    mail to: "mubeenmuhammad098@gmail.com"
+                    subject:"Build status Email"
+                    body:"Build log attached!"
+                }
             }
         }
         stage('Test') {
